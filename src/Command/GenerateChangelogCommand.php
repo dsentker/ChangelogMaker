@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GenerateChangelogCommand extends Command
 {
 
-    protected static $defaultName = 'changelog:generate';
+    protected static $defaultName = 'generate:simple';
 
     /** @var ChangelogMaker */
     private $changelogMaker;
