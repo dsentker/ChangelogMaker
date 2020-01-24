@@ -22,6 +22,18 @@ class Section
         return $this->sectionLines;
     }
 
+    public function hasLine($identifier): bool
+    {
+        return array_key_exists($identifier, $this->sectionLines);
+    }
+
+    public function getLine(string $identifier): ?string
+    {
+        return $this->hasLine($identifier)
+            ? $this->sectionLines[$identifier]
+            : null;
+    }
+
     public function __toString(): string
     {
         $outLines = [];

@@ -26,7 +26,10 @@ class OutputParser
                     $section->addLine($key, $value);
                 }
             }
-            $returnSections[] = $section;
+            if (count($section->getSectionLines()) > 0) {
+                $returnSections[] = $section;
+            }
+
         }
 
         return $returnSections;

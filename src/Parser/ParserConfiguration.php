@@ -18,33 +18,17 @@ class ParserConfiguration
     private $fieldsToParse;
 
     /**
-     * @param array|null $fieldsToParse     An array which defines the fields to parse. The array value represents the
-     *                                      git log placeholder (defined here:
-     *                                      https://git-scm.com/docs/pretty-formats),
-     *                                      while the array key is a unique identifier to get the value for the
-     *                                      placeholder.
-     * @param string     $keyValueSeparator The string that separates $fieldsToParse key and value, e.g. key::::value
-     * @param string     $fieldDelimiter    The string that separates fields, e.g.
+     * @param string $keyValueSeparator     The string that separates $fieldsToParse key and value, e.g. key::::value
+     * @param string $fieldDelimiter        The string that separates fields, e.g.
      *                                      keyValuePair1||||keyValuePair2||||keyValuePair3...
-     * @param string     $sectionDelimiter  The string that separates new log entries
+     * @param string $sectionDelimiter      The string that separates new log entries
      *
      */
-    public function __construct(array $fieldsToParse = [], string $keyValueSeparator = '::::', string $fieldDelimiter = '||||', string $sectionDelimiter = '>>>>')
+    public function __construct(string $keyValueSeparator = '::::', string $fieldDelimiter = '||||', string $sectionDelimiter = '>>>>')
     {
-        $this->fieldsToParse = !empty($fieldsToParse) ? $fieldsToParse : self::getDefaultFieldsToParse();
         $this->keyValueSeparator = $keyValueSeparator;
         $this->fieldSeparator = $fieldDelimiter;
         $this->sectionDelimiter = $sectionDelimiter;
-    }
-
-    private static function getDefaultFieldsToParse(): array
-    {
-        return [
-            'DATE'    => '%as',
-            'AUTHOR'  => '%cl',
-            'MESSAGE' => '%B',
-            'HASH'    => '%h',
-        ];
     }
 
     public function getKeyValueSeparator(): string
@@ -77,14 +61,22 @@ class ParserConfiguration
         $this->sectionDelimiter = $sectionDelimiter;
     }
 
+    /**
+     * @return array
+     */
     public function getFieldsToParse(): array
     {
         return $this->fieldsToParse;
     }
 
+    /**
+     * @param array $fieldsToParse
+     *
+     * @internal This method is not meant to be changed from the developer. It is called from ChangelogMaker class with
+     *           data provided by the writer.
+     */
     public function setFieldsToParse(array $fieldsToParse): void
     {
         $this->fieldsToParse = $fieldsToParse;
     }
-
 }

@@ -8,13 +8,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateChangelogCommand extends Command
+abstract class AbstractChangeLogGeneratorCommand extends Command
 {
 
-    protected static $defaultName = 'generate:simple';
-
     /** @var ChangelogMaker */
-    private $changelogMaker;
+    protected $changelogMaker;
 
     public function __construct(ChangelogMaker $changelogMaker)
     {
@@ -34,10 +32,6 @@ class GenerateChangelogCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
-            'CHANGELOG GENERATOR',
-        ]);
-
         $filePath = $input->getArgument('fileName');
         if ($this->changelogMaker->writeChangelog(
             $filePath,
@@ -48,8 +42,6 @@ class GenerateChangelogCommand extends Command
         }
 
         return 0;
-
     }
-
 
 }

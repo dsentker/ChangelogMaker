@@ -22,9 +22,9 @@ class ChangelogMaker
     /** @var ParserConfiguration */
     private $configuration;
 
-    public function __construct(?ParserConfiguration $parserConfiguration = null)
+    public function __construct()
     {
-        $this->configuration = $parserConfiguration ?? new ParserConfiguration();
+        $this->configuration = new ParserConfiguration();
         $this->logCaller = new LogCaller();
         $this->outputParser = new OutputParser();
         $this->logfileWriter = new SimpleLogfileWriter();
@@ -67,9 +67,15 @@ class ChangelogMaker
 
     public function writeChangelog(string $filePath, string $fromVersion, ?string $toVersion): bool
     {
-        $logOutput = $this->getLogCaller()->getLog($this->configuration, $fromVersion, $toVersion);
-        $sections = $this->getOutputParser()->parse($this->configuration, $logOutput);
-        return $this->getLogfileWriter()->setPath($filePath)->write($sections);
-    }
+        $writer = $this->getLogfileWriter();
 
+        $configuration = $this->configuration;
+        $configuration->setFieldsToParse($writer->getFieldDefinition());
+
+        $writer->setConfiguration($configuration);
+
+        $logOutput = $this->getLogCaller()->getLog($configuration, $fromVersion, $toVersion);
+        $sections = $this->getOutputParser()->parse($configuration, $logOutput);
+        return $writer->setPath($filePath)->write($sections);
+    }
 }

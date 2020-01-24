@@ -4,16 +4,8 @@ namespace ChangelogMaker\Writer;
 
 use ChangelogMaker\Parser\Section;
 
-class SimpleLogfileWriter implements LogfileWriter
+class SimpleLogfileWriter extends AbstractWriter
 {
-
-    private $path;
-
-    public function setPath(string $path): LogfileWriter
-    {
-        $this->path = $path;
-        return $this;
-    }
 
     /**
      * @param Section[] $sections
@@ -22,7 +14,18 @@ class SimpleLogfileWriter implements LogfileWriter
      */
     public function write(array $sections): bool
     {
-        echo realpath($this->path);
         return (bool)file_put_contents($this->path, implode($sections));
     }
+
+    public function getFieldDefinition(): array
+    {
+        return [
+            'DATE'    => '%aI',
+            'AUTHOR'  => '%cl',
+            'MESSAGE' => '%B',
+            'HASH'    => '%h',
+        ];
+    }
+
+
 }
