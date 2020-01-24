@@ -8,7 +8,7 @@
     "generator"
   ],
   "homepage": "https://github.com/dsentker/ChangelogMaker",
-  "license": "GNU",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Daniel Sentker",
