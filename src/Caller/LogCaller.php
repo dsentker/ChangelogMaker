@@ -33,5 +33,4 @@ class LogCaller
 
         return sprintf('%s --format="%s" %s 2>&1', static::BASE_COMMAND, $formatInstructions, $fromTo);
     }
-
 }

@@ -43,5 +43,4 @@ abstract class AbstractChangeLogGeneratorCommand extends Command
 
         return 0;
     }
-
 }

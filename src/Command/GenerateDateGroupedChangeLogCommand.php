@@ -13,6 +13,8 @@ class GenerateDateGroupedChangeLogCommand extends AbstractChangeLogGeneratorComm
     public function __construct(ChangelogMaker $changelogMaker)
     {
         parent::__construct($changelogMaker);
+
+        // TODO let command argument decide which date format to use
         $this->changelogMaker->setLogfileWriter(new MarkdownGroupByDateWriter('Y-m-d'));
     }
 }

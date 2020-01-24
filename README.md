@@ -6,5 +6,5 @@
 
 # Usage
 
-`php bin/changelog.php generate:simple changelog-example.txt 0.0.1`
-`php bin/changelog.php generate:group:date changelog-example.md 0.0.1`
+`php bin/changelog generate:simple changelog-example.txt 0.0.1`
+`php bin/changelog generate:group:date changelog-example.md 0.0.1`

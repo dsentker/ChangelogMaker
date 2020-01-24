@@ -26,6 +26,4 @@ class SimpleLogfileWriter extends AbstractWriter
             'HASH'    => '%h',
         ];
     }
-
-
 }
