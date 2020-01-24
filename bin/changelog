@@ -1,8 +1,9 @@
 #!/usr/bin/env php
 <?php
+/** @noinspection PhpIncludeInspection */
 require file_exists(__DIR__ . '/../vendor/autoload.php')
-    ? __DIR__ . '/../vendor/autoload.php'
-    : __DIR__ . '/../../../vendor/autoload.php';
+    ? __DIR__ . '/../vendor/autoload.php' // single usage
+    : __DIR__ . '/../../../autoload.php'; // usage in other projects (as part of the /vendor folder
 
 use ChangelogMaker\ChangelogMaker;
 use ChangelogMaker\Command\GenerateDateGroupedChangeLogCommand;
