@@ -47,6 +47,8 @@ class GenerateChangelogCommand extends Command
             $output->writeln(sprintf('Changelog created: %s', $filePath));
         }
 
+        return 0;
+
     }
 
 
